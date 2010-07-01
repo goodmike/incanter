@@ -5,4 +5,7 @@ for f in lib/*.jar; do
     CLASSPATH="$CLASSPATH":$f
 done
 
+CLASSPATH=$CLASSPATH:modules/incanter-intel/src
+echo $CLASSPATH
+
 java -Xmx1G -cp "$CLASSPATH" jline.ConsoleRunner clojure.main -i script/run.clj -r
