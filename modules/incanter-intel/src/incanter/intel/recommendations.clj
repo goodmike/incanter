@@ -40,8 +40,8 @@
 
   Examples:
     (ratings-pearson 
-      {\"Lisa\"    {\"Lady\" 2.5, \"Snakes\" 3.0, \"Superman\" 3.5,},
-       \"Gene\"    {\"Lady\" 3.0, \"Snakes\" 3.5, \"Luck\" 1.5},
+      {\"Lisa\"    {\"Lady\" 2.5, \"Snakes\" 3.5, \"Superman\" 4.0},
+       \"Gene\"    {\"Lady\" 3.0, \"Snakes\" 4.0, \"Luck\" 4.5},
        \"Toby\"    {\"Snakes\" 4.5, \"Superman\" 4.0, \"Dupree\" 1.0}}
       \"Lisa\"
       \"Gene\")
@@ -64,12 +64,12 @@
 
   Examples:
     (items-ratings
-      {\"Lisa\"    {\"Lady\" 2.5, \"Snakes\" 3.0, \"Superman\" 3.5,},
-       \"Gene\"    {\"Lady\" 3.0, \"Snakes\" 3.5, \"Luck\" 1.5},
+      {\"Lisa\"    {\"Lady\" 2.5, \"Snakes\" 3.5, \"Superman\" 4.0},
+       \"Gene\"    {\"Lady\" 3.0, \"Snakes\" 4.0, \"Luck\" 4.5},
        \"Toby\"    {\"Snakes\" 4.5, \"Superman\" 4.0, \"Dupree\" 1.0}}
       '(\"Lisa\" \"Gene\")
       '(\"Lady\" \"Snakes\"))
-    ; => {\"Snakes\" {\"Gene\" 3.5, \"Lisa\" 3.5}, \"Lady\" {\"Gene\" 3.0, \"Lisa\" 2.5}}
+    ; => {\"Snakes\" {\"Gene\" 4.0, \"Lisa\" 3.5}, \"Lady\" {\"Gene\" 3.0, \"Lisa\" 2.5}}
 "
 ([ratings-map critics items]
 	(reduce (fn [ratings item] 
@@ -90,12 +90,12 @@
 
   Example:
   (recommendations
-    {\"Lisa\"    {\"Lady\" 2.5, \"Snakes\" 3.5, \"Luck\" 3.0, \"Superman\" 3.5},
-     \"Gene\"    {\"Lady\" 3.0, \"Snakes\" 3.5, \"Luck\" 3.5, \"Dupree\" 3.5},
-     \"Mick\"    {\"Lady\" 3.0, \"Luck\" 3.0, \"Superman\" 3.0, \"Dupree\" 2.0},
+    {\"Lisa\"    {\"Lady\" 2.5, \"Snakes\" 3.5, \"Luck\" 3.0, \"Superman\" 4.0},
+     \"Gene\"    {\"Lady\" 3.0, \"Snakes\" 4.0, \"Luck\" 4.5, \"Dupree\" 3.5},
+     \"Mick\"    {\"Lady\" 2.5, \"Luck\" 3.0, \"Superman\" 3.5, \"Dupree\" 2.0},
      \"Toby\"    {\"Snakes\" 4.5, \"Superman\" 4.0, \"Dupree\" 1.0}}
     \"Toby\")
-    ; => {\"Lady\" 2.75, \"Luck\" 3.12}
+    ; => {\"Lady\" 3.5, \"Luck\" 0.5}
 "
 ([ratings-map critic_id]
   (let [others       (filter #(not= critic_id %) (keys ratings-map))
